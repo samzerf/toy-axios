@@ -27,9 +27,13 @@ setTimeout(() => {
     method: 'get',
     url: '/error/get'
   }).then((res) => {
-    console.log('res', res)
-  }).catch((e) => {
-    console.log('error', e)
+    console.log(res)
+  }).catch((e: AxiosError) => {
+    console.log(e)
+    console.log(e.config)
+    console.log(e.request)
+    console.log(e.code)
+    console.log(e.response)
   })
 }, 5000)
 
@@ -38,7 +42,11 @@ axios({
   url: '/error/timeout',
   timeout: 2000
 }).then((res) => {
-  console.log('res', res)
-}).catch((e) => {
-  console.log(e)
+  console.log(res)
+}).catch((e: AxiosError) => {
+  console.log(e.message)
+  console.log(e.config)
+  console.log(e.request)
+  console.log(e.code)
+  console.log(e.response)
 })

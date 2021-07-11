@@ -44,7 +44,8 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
       }
 
       const responseHeaders = parseHeaders(request.getAllResponseHeaders())
-      const responseData = responseType && responseType !== 'text' ? request.response : request.responseText
+      const responseData =
+        responseType && responseType !== 'text' ? request.response : request.responseText
       const response: AxiosResponse = {
         data: responseData,
         status: request.status,
@@ -72,6 +73,10 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
 
     request.open(method.toUpperCase(), url!, true)
 
+    if (timeout) {
+      request.timeout = timeout
+    }
+
     Object.keys(headers).forEach(name => {
       if (data === null && name.toLowerCase() === 'content-type') {
         delete headers[name]
@@ -82,5 +87,4 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
 
     request.send(data)
   })
-
 }
