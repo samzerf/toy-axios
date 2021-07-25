@@ -132,12 +132,26 @@ function registerExtendRouter() {
   })
 }
 
+function registerCancenRouter() {
+  router.get('/cancel/get', function(req, res) {
+    setTimeout(() => {
+      res.json('hello world')
+    }, 1000)
+  })
+  router.post('/cancel/post', function(req, res) {
+    setTimeout(() => {
+      res.json(req.body)
+    }, 1000)
+  })
+}
+
 registerSimpleRouter()
 registerBaseRouter()
 registerErrorRouter()
 registerExtendRouter()
 registerInterceptorRouter()
 registerConfigRouter()
+registerCancenRouter()
 
 app.use(router)
 
